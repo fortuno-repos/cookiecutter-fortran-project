@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  BUILD_DIR_PREFIX: _build
+
+jobs:
+
+  #
+  # Cookiecutter project generation test
+  #
+  test-generated-project:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        compiler: [intel]
+
+    steps:
+
+      - name: Check-out code
+        uses: actions/checkout@v4
+
+      - name: Setup Intel compiler
+        uses: rscohn2/setup-oneapi@v0
+        with:
+          components: |
+            ifx
+            impi
+
+      - name: Setup Intel environment
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          printenv >> ${GITHUB_ENV}
+          echo "FC=ifx" >> ${GITHUB_ENV}
+
+      - name: Setup build tools
+        run: |
+          pip install cookiecutter cmake ninja
+
+      - name: Test CMake serial
+        run: |
+          ./test/cmake-serial/test.sh ${BUILD_DIR_PREFIX}_cmake_serial
+
+      - name: Test CMake MPI
+        run: |
+          ./test/cmake-mpi/test.sh ${BUILD_DIR_PREFIX}_cmake_mpi
+
+      - name: Test CMake coarray
+        run: |
+          ./test/cmake-coarray/test.sh ${BUILD_DIR_PREFIX}_cmake_coarray

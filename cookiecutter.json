@@ -1,0 +1,31 @@
+{
+    "build_system": ["cmake", "fpm", "all"],
+    "parallelization": ["serial", "mpi", "coarray"],
+    "project_name": "MyProject",
+    "project_slug": "{{ cookiecutter.project_name.lower() }}",
+    "description": "A short description of the project",
+    "version": "0.1.0",
+    "with_app": true,
+    "with_example": true,
+    "__project_slug_upper": "{{ cookiecutter.project_slug.upper() }}",
+    "__prompts__": {
+        "build_system": {
+            "__prompt__": "Which build system should the config files be generated for?",
+            "cmake": "CMake",
+            "fpm": "Fpm",
+            "all": "Config files for both build systems"
+        },
+        "parallelization": {
+            "__prompt__": "Which parallelization model should be used?",
+            "serial": "Serial or OpenMP threaded code",
+            "mpi": "MPI-parallelized code",
+            "coarray": "Coarray-parallelized code"
+        },
+        "project_name": "Name of the project",
+        "project_slug": "Slug of the project",
+        "description": "Short description of the project",
+        "version": "Project version",
+        "with_app": "Generate app (installable standalone program)?",
+        "with_example": "Generate example (non-installable standalone program)?"
+    }
+}

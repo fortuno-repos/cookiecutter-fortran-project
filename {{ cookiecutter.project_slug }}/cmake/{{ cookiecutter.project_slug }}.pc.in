@@ -1,0 +1,6 @@
+Name: @PROJECT_NAME@
+Description: @PROJECT_DESCRIPTION@
+Version: @PROJECT_VERSION@
+
+Cflags: -I@CMAKE_INSTALL_FULL_LIBDIR@/@{{cookiecutter.__project_slug_upper}}_INSTALL_MODULEDIR@
+Libs: -L@CMAKE_INSTALL_FULL_LIBDIR@ -l{{cookiecutter.project_slug}}

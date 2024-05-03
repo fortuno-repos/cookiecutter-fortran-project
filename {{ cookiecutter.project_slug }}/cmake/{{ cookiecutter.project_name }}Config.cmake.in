@@ -1,0 +1,8 @@
+@PACKAGE_INIT@
+
+{% if cookiecutter.parallelization == "mpi" -%}
+include(CMakeFindDependencyMacro)
+find_dependency(MPI)
+{%- endif %}
+
+include(${CMAKE_CURRENT_LIST_DIR}/{{cookiecutter.project_name}}Targets.cmake)
