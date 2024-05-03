@@ -3,11 +3,12 @@ Cookiecutter-Fortran-Fortuno
 ****************************
 
 Cookiecutter-Fortran-Fortuno offers templates for setting up a Fortran project,
-allowing you to select from various build systems (currently CMake is
-implemented, Fpm are Meson in progress), as well as different parallelization
-models such as serial, MPI, and coarray. The resulting project will include a
-library, unit tests utilizing the `Fortuno <https://fortuno.readthedocs.io>`_
-unit testing framework, and optionally a standalone application and an example.
+allowing you to select from various build systems (currently CMake and Fpm are
+implemented, Meson is in progress), as well as different
+parallelization models such as serial, MPI, and coarray. The resulting project
+will include a library, unit tests utilizing the `Fortuno
+<https://fortuno.readthedocs.io>`_ unit testing framework, and optionally a
+standalone application and an example.
 
 
 Usage

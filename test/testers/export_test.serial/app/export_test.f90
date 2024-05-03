@@ -1,5 +1,5 @@
 program export_test
-  use testcmakeserial, only : factorial
+  use testproject, only : factorial
   implicit none
 
   write(*, "(a, i0)") "Factorial of 10 = ", factorial(10)

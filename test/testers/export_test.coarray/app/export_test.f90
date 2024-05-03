@@ -1,5 +1,5 @@
 program export_test
-  use testcmakecoarray, only : broadcast
+  use testproject, only : broadcast
   implicit none
 
   integer :: buffer

@@ -1,0 +1,10 @@
+name = "export_test"
+version = "0.0.0"
+
+[[executable]]
+name = "export_test"
+main = "export_test.f90"
+
+[dependencies]
+# This line should be added by the test.sh script with the correct path
+# testproject = { path = ".../testproject" }

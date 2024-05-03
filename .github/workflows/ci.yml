@@ -41,19 +41,32 @@ jobs:
           source /opt/intel/oneapi/setvars.sh
           printenv >> ${GITHUB_ENV}
           echo "FC=ifx" >> ${GITHUB_ENV}
+          echo "FPM_FC=ifx" >> ${GITHUB_ENV}
 
       - name: Setup build tools
         run: |
-          pip install cookiecutter cmake ninja
+          pip install cookiecutter cmake ninja fpm
 
       - name: Test CMake serial
         run: |
-          ./test/cmake-serial/test.sh ${BUILD_DIR_PREFIX}_cmake_serial
+          ./test/runners/test.cmake-serial.sh ${BUILD_DIR_PREFIX}_cmake_serial
 
       - name: Test CMake MPI
         run: |
-          ./test/cmake-mpi/test.sh ${BUILD_DIR_PREFIX}_cmake_mpi
+          ./test/runners/test.cmake-mpi.sh ${BUILD_DIR_PREFIX}_cmake_mpi
 
       - name: Test CMake coarray
         run: |
-          ./test/cmake-coarray/test.sh ${BUILD_DIR_PREFIX}_cmake_coarray
+          ./test/runners/test.cmake-coarray.sh ${BUILD_DIR_PREFIX}_cmake_coarray
+
+      - name: Test Fpm serial
+        run: |
+          ./test/runners/test.fpm-serial.sh ${BUILD_DIR_PREFIX}_fpm_serial
+
+      - name: Test Fpm MPI
+        run: |
+          FPM_FFLAGS="-stand f18" ./test/runners/test.fpm-mpi.sh ${BUILD_DIR_PREFIX}_fpm_mpi
+
+      - name: Test Fpm coarray
+        run: |
+          FPM_FFLAGS="-coarray" FPM_LDFLAGS="-coarray" ./test/runners/test.fpm-coarray.sh ${BUILD_DIR_PREFIX}_fpm_coarray

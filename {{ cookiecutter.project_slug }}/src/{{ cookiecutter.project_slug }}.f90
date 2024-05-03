@@ -2,10 +2,10 @@
 !!
 !! Built and installed by default.
 !!
-{% if cookiecutter.parallelization == "serial" -%}
+{% if cookiecutter.__serial_code == "True" -%}
 {% include "lib-serial.f90" %}
-{%- elif cookiecutter.parallelization == "mpi" -%}
+{%- elif cookiecutter.__mpi_code == "True" -%}
 {% include "lib-mpi.f90" %}
-{%- elif cookiecutter.parallelization == "coarray" -%}
+{%- elif cookiecutter.__coarray_code == "True" -%}
 {% include "lib-coarray.f90" %}
 {%- endif %}

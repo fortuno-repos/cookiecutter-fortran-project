@@ -1,0 +1,45 @@
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+license = "[NAME OF YOUR LICENSE]"
+author = "[YOUR NAME]"
+maintainer = "[MAINTAINERS EMAIL]"
+copyright = "Copyright [YEAR], [COPYRIGHT HOLDER]"
+
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+module-naming = false
+
+[install]
+library = true
+
+[[executable]]
+name = "{{ cookiecutter.project_slug }}_app"
+main = "{{ cookiecutter.project_slug }}_app.f90"
+
+[fortran]
+{% if cookiecutter.__mpi_code == "True" -%}
+# Enabling the implicit options seems to be necessary for using fpm with meta-dependency mpi.
+# Make sure not to use those features in your project. ;-)
+implicit-typing = true
+implicit-external = true
+{%- else -%}
+implicit-typing = false
+implicit-external = false
+{%- endif %}
+source-form = "free"
+
+{% if cookiecutter.__mpi_code == "True" -%}
+[dependencies]
+mpi = "*"
+{%- endif %}
+
+[dev-dependencies]
+{% if cookiecutter.__serial_code == "True" -%}
+fortuno = { git = "https://github.com/fortuno-repos/fortuno.git" }
+{%- elif cookiecutter.__mpi_code == "True" -%}
+fortuno-mpi = { git = "https://github.com/fortuno-repos/fortuno-mpi.git" }
+{%- elif cookiecutter.__coarray_code == "True" -%}
+fortuno-coarray = { git = "https://github.com/fortuno-repos/fortuno-coarray.git" }
+{%- endif %}

@@ -1,6 +1,6 @@
 program export_test
   use mpi_f08, only : MPI_Comm, MPI_Comm_rank, MPI_COMM_WORLD, MPI_Finalize, MPI_Init
-  use testcmakempi, only : broadcast
+  use testproject, only : broadcast
   implicit none
 
   type(MPI_Comm) :: comm
