@@ -1,8 +1,8 @@
 !> Test app driving Fortuno unit tests.
-{% if cookiecutter.parallelization == "serial" -%}
+{% if cookiecutter.__serial_code == "True" -%}
 {% include "testapp-serial.f90" %}
-{%- elif cookiecutter.parallelization == "mpi" -%}
+{%- elif cookiecutter.__mpi_code == "True" -%}
 {% include "testapp-mpi.f90" %}
-{%- elif cookiecutter.parallelization == "coarray" -%}
+{%- elif cookiecutter.__coarray_code == "True" -%}
 {% include "testapp-coarray.f90" %}
 {%- endif %}

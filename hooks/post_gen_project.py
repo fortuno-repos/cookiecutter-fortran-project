@@ -4,13 +4,15 @@ import os
 import re
 import shutil
 
-CMAKE_BUILD = "{{ cookiecutter.build_system }}" == "cmake"
-FPM_BUILD = "{{ cookiecutter.build_system }}" == "fpm"
-MESON_BUILD = "{{ cookiecutter.build_system }}" == "meson"
+PROJECT_SLUG = "{{ cookiecutter.project_slug }}"
 
-SERIAL_CODE = "{{ cookiecutter.parallelization }}" == "serial"
-MPI_CODE = "{{ cookiecutter.parallelization }}" == "mpi"
-COARRAY_CODE = "{{ cookiecutter.parallelization }}" == "coarray"
+CMAKE_BUILD = {{ cookiecutter.__cmake_build }}
+FPM_BUILD = {{ cookiecutter.__fpm_build }}
+MESON_BUILD = {{ cookiecutter.__meson_build }}
+
+SERIAL_CODE = {{ cookiecutter.__serial_code }}
+MPI_CODE = {{ cookiecutter.__mpi_code }}
+COARRAY_CODE = {{ cookiecutter.__coarray_code }}
 
 WITH_APP = {{cookiecutter.with_app}}
 WITH_EXAMPLE = {{cookiecutter.with_example}}

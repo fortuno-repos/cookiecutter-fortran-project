@@ -1,31 +1,39 @@
 {
-    "build_system": ["cmake", "fpm", "all"],
-    "parallelization": ["serial", "mpi", "coarray"],
     "project_name": "MyProject",
     "project_slug": "{{ cookiecutter.project_name.lower() }}",
     "description": "A short description of the project",
     "version": "0.1.0",
+    "parallelization": ["serial", "mpi", "coarray"],
+    "build_system": ["cmake", "fpm", "all"],
     "with_app": true,
     "with_example": true,
-    "__project_slug_upper": "{{ cookiecutter.project_slug.upper() }}",
+
     "__prompts__": {
+        "project_name": "Name of the project",
+        "project_slug": "Slug of the project",
+        "description": "Short description of the project",
+        "version": "Project version",
+        "parallelization": {
+            "__prompt__": "Which parallelization model should be used?",
+            "serial": "Serial code",
+            "mpi": "MPI-parallelized code",
+            "coarray": "Coarray-parallelized code"
+        },
         "build_system": {
             "__prompt__": "Which build system should the config files be generated for?",
             "cmake": "CMake",
             "fpm": "Fpm",
             "all": "Config files for both build systems"
         },
-        "parallelization": {
-            "__prompt__": "Which parallelization model should be used?",
-            "serial": "Serial or OpenMP threaded code",
-            "mpi": "MPI-parallelized code",
-            "coarray": "Coarray-parallelized code"
-        },
-        "project_name": "Name of the project",
-        "project_slug": "Slug of the project",
-        "description": "Short description of the project",
-        "version": "Project version",
         "with_app": "Generate app (installable standalone program)?",
         "with_example": "Generate example (non-installable standalone program)?"
-    }
+    },
+
+    "__project_slug_upper": "{{ cookiecutter.project_slug.upper() }}",
+    "__cmake_build": "{{ cookiecutter.build_system in ['cmake', 'all'] }}",
+    "__fpm_build": "{{ cookiecutter.build_system in ['fpm', 'all'] }}",
+    "__meson_build": "{{ cookiecutter.build_system in ['meson', 'all'] }}",
+    "__serial_code": "{{ cookiecutter.parallelization == 'serial' }}",
+    "__mpi_code": "{{ cookiecutter.parallelization == 'mpi' }}",
+    "__coarray_code": "{{ cookiecutter.parallelization == 'coarray' }}"
 }

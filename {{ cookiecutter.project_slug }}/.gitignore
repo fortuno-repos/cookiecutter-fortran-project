@@ -1,0 +1,9 @@
+_NOTES.md
+*~
+*.mod
+*.o
+*.a
+# Ignore common build folder names
+build
+_build
+

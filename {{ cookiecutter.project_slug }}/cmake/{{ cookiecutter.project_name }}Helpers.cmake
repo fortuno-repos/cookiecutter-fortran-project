@@ -20,9 +20,9 @@ function ({{cookiecutter.project_slug}}_setup_build_type default_build_type)
 endfunction ()
 
 
-{% if cookiecutter.parallelization == "coarray" -%}
+{% if cookiecutter.__coarray_code == "True" -%}
 # Applies coarray build flags to the target
-function (testcmakecoarray_add_coarray_build_flags target)
+function ({{cookiecutter.project_slug}}_add_coarray_build_flags target)
 
   if (NOT TARGET CoarrayBuildInterface)
     if ({{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS)

@@ -3,10 +3,10 @@
 !! Standalone program based on the {{cookiecutter.project_slug}} library.
 !! By default built and installed only, if the project is the top-level project.
 !!
-{% if cookiecutter.parallelization == "serial" -%}
+{% if cookiecutter.__serial_code == "True" -%}
 {% include "app-serial.f90" %}
-{%- elif cookiecutter.parallelization == "mpi" -%}
+{%- elif cookiecutter.__mpi_code == "True" -%}
 {% include "app-mpi.f90" %}
-{%- elif cookiecutter.parallelization == "coarray" -%}
+{%- elif cookiecutter.__coarray_code == "True" -%}
 {% include "app-coarray.f90" %}
 {%- endif %}
