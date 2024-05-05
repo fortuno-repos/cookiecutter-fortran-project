@@ -1,13 +1,13 @@
 ****************************
-Cookiecutter-Fortran-Fortuno
+Cookiecutter-Fortran-Project
 ****************************
 
-Cookiecutter-Fortran-Fortuno offers templates for setting up a Fortran project,
+Cookiecutter-Fortran-Project offers templates for setting up a Fortran project,
 allowing you to select from various build systems (currently CMake and Fpm are
 implemented, Meson is in progress), as well as different
 parallelization models such as serial, MPI, and coarray. The resulting project
-will include a library, unit tests utilizing the `Fortuno
-<https://fortuno.readthedocs.io>`_ unit testing framework, and optionally a
+will include a library, unit tests (utilizing the `Fortuno
+<https://fortuno.readthedocs.io>`_ unit testing framework), and optionally a
 standalone application and an example.
 
 
@@ -49,7 +49,7 @@ To generate a new Fortran project, run:
 
 .. code-block:: bash
 
-    cookiecutter gh:fortuno-repos/cookiecutter-fortran-fortuno
+    cookiecutter gh:fortuno-repos/cookiecutter-fortran-project
 
 You will be asked to choose the build system and parallelization model for your
 project, along with additional details about it. The project will be generated
@@ -69,8 +69,8 @@ development.
 License
 =======
 
-Cookiecutter-Fortuno is licensed under the `BSD-2-Clause Plus Patent License
-<LICENSE>`_. This `OSI-approved
+Cookiecutter-Fortran-Project is licensed under the `BSD-2-Clause Plus Patent
+License <LICENSE>`_. This `OSI-approved
 <https://opensource.org/licenses/BSDplusPatent>`_ license combines the 2-clause
 BSD license with an explicit patent grant from contributors. The SPDX license
 identifier for this project is `BSD-2-Clause-Patent
