@@ -14,7 +14,7 @@ cmake\
   -B _build\
   -DCMAKE_INSTALL_PREFIX=$PWD/_install\
   testproject/
-cmake --build _build --verbose -j1
+cmake --build _build
 ctest --test-dir _build
 cmake --install _build
 ./_install/bin/testproject_app
@@ -26,7 +26,7 @@ CMAKE_PREFIX_PATH=$PWD/_install\
   -GNinja\
   -DFIND_BY_CMAKE=ON\
   ${TEST_DIR}/testers/export_test.coarray
-cmake --build _build_export_cmake --verbose -j1
+cmake --build _build_export_cmake
 ./_build_export_cmake/app/export_test
 
 PKG_CONFIG_PATH=$PWD/_install/lib/pkgconfig\
@@ -35,5 +35,5 @@ PKG_CONFIG_PATH=$PWD/_install/lib/pkgconfig\
   -GNinja\
   -DFIND_BY_CMAKE=OFF\
   ${TEST_DIR}/testers/export_test.coarray
-cmake --build _build_export_pkgconf --verbose -j1
+cmake --build _build_export_pkgconf
 ./_build_export_pkgconf/app/export_test

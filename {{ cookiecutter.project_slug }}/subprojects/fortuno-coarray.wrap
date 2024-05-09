@@ -1,0 +1,4 @@
+[wrap-git]
+directory=fortuno-coarray
+url=https://github.com/fortuno-repos/fortuno-coarray
+revision=main

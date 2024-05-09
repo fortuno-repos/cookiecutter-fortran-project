@@ -1,0 +1,19 @@
+{
+    "cookiecutter": {
+        "project_name": "TestProject",
+        "project_slug": "testproject",
+        "description": "Meson based build of coarray-parallelized code",
+        "version": "0.0.0",
+        "parallelization": "coarray",
+        "build_system": "meson",
+        "with_app": true,
+        "with_example": true,
+        "__project_slug_upper": "TESTPROJECT",
+        "__cmake_build": "False",
+        "__fpm_build": "False",
+        "__meson_build": "True",
+        "__serial_code": "False",
+        "__mpi_code": "False",
+        "__coarray_code": "True"
+    }
+}

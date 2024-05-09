@@ -1,4 +1,4 @@
-"""Deletes unnecessary files after the project had been generated."""
+"""Post-processes the generated template."""
 
 import os
 import re
@@ -22,18 +22,30 @@ WITH_EXAMPLE = {{cookiecutter.with_example}}
 # matches a path and the corresponding boolean value is False, the path is removed.
 OPTIONAL_PATHS = [
     (r"./app$", WITH_APP),
-    (r"./cmake$", CMAKE_BUILD),
+    (r"./config/cmake$", CMAKE_BUILD),
+    (r"./config/meson$", MESON_BUILD),
     (r"./example$", WITH_EXAMPLE),
     (r"./subprojects$", CMAKE_BUILD or MESON_BUILD),
     (r"./subprojects/Fortuno.cmake$", CMAKE_BUILD and SERIAL_CODE),
     (r"./subprojects/FortunoMpi.cmake$", CMAKE_BUILD and MPI_CODE),
     (r"./subprojects/FortunoCoarray.cmake$", CMAKE_BUILD and COARRAY_CODE),
+    (r"./subprojects/fortuno.wrap$", MESON_BUILD and SERIAL_CODE),
+    (r"./subprojects/fortuno-mpi.wrap$", MESON_BUILD and MPI_CODE),
+    (r"./subprojects/fortuno-coarray.wrap$", MESON_BUILD and COARRAY_CODE),
     (r".*/CMakeLists.txt$", CMAKE_BUILD),
-    (r"fpm.toml$", FPM_BUILD),
+    (r"./fpm.toml$", FPM_BUILD),
+    (r".*/meson.build$", MESON_BUILD),
+    (r".*/meson_options$", MESON_BUILD),
 ]
 
 
 def main():
+    """Main script."""
+    _remove_superfluous_paths()
+
+
+def _remove_superfluous_paths():
+    """Removes superfluous files and directories."""
     optional_paths = [(re.compile(path), keep) for path, keep in OPTIONAL_PATHS]
     rootdir = "."
     for dirpath, dirnames, filenames in os.walk(rootdir):

@@ -12,31 +12,78 @@ env:
 
 jobs:
 
-  #
-  # Cookiecutter project generation test
-  #
-  test-generated-project:
+  gnu-openmpi:
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        compiler: [intel]
+    runs-on: ubuntu-latest
 
     steps:
 
       - name: Check-out code
         uses: actions/checkout@v4
 
-      - name: Setup Intel compiler
+      - name: Setup GNU compiler
+        uses: fortran-lang/setup-fortran@v1
+        with:
+          compiler: gcc
+          version: 13
+
+      - name: Setup OpenMPI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openmpi-common openmpi-bin libopenmpi-dev
+
+      - name: Setup GNU/OpenMPI environment
+        run: |
+          echo "FC=${{ env.FC }}" >> ${GITHUB_ENV}
+          echo "FPM_FC=${{ env.FC }}" >> ${GITHUB_ENV}
+
+      - name: Setup build tools
+        run: |
+          pip install cookiecutter cmake meson ninja fpm
+
+      - name: Test CMake serial
+        run: |
+          ./test/runners/test.cmake-serial.sh ${BUILD_DIR_PREFIX}_cmake_serial
+
+      # # CMake can not detect OpenMPI on Ubuntu 22.04 due to broken CMake export file
+      # - name: Test CMake MPI
+      #   run: |
+      #     ./test/runners/test.cmake-mpi.sh ${BUILD_DIR_PREFIX}_cmake_mpi
+
+      - name: Test Fpm serial
+        run: |
+          ./test/runners/test.fpm-serial.sh ${BUILD_DIR_PREFIX}_fpm_serial
+
+      - name: Test Fpm MPI
+        run: |
+          ./test/runners/test.fpm-mpi.sh ${BUILD_DIR_PREFIX}_fpm_mpi
+
+      - name: Test Meson serial
+        run: |
+          ./test/runners/test.meson-serial.sh ${BUILD_DIR_PREFIX}_meson_serial
+
+      - name: Test Meson MPI
+        run: |
+          ./test/runners/test.meson-serial.sh ${BUILD_DIR_PREFIX}_meson_mpi
+
+
+  intel-impi:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check-out code
+        uses: actions/checkout@v4
+
+      - name: Setup Intel/IntelMPI toolchain
         uses: rscohn2/setup-oneapi@v0
         with:
           components: |
             ifx
             impi
 
-      - name: Setup Intel environment
+      - name: Setup Intel/IntelMPI environment
         run: |
           source /opt/intel/oneapi/setvars.sh
           printenv >> ${GITHUB_ENV}
@@ -45,7 +92,7 @@ jobs:
 
       - name: Setup build tools
         run: |
-          pip install cookiecutter cmake ninja fpm
+          pip install cookiecutter cmake meson ninja fpm
 
       - name: Test CMake serial
         run: |
@@ -64,9 +111,28 @@ jobs:
           ./test/runners/test.fpm-serial.sh ${BUILD_DIR_PREFIX}_fpm_serial
 
       - name: Test Fpm MPI
+        # Workaround for IntelMPI: FPM uses compiler flags (-standard-semantics) which makes
+        # compiled binary incompatible with IntelMPI. Overriding with some dummy flags.
         run: |
           FPM_FFLAGS="-stand f18" ./test/runners/test.fpm-mpi.sh ${BUILD_DIR_PREFIX}_fpm_mpi
 
       - name: Test Fpm coarray
+        run: >
+          FPM_FFLAGS="-coarray"
+          FPM_LDFLAGS="-coarray"
+          ./test/runners/test.fpm-coarray.sh ${BUILD_DIR_PREFIX}_fpm_coarray
+
+      - name: Test Meson serial
         run: |
-          FPM_FFLAGS="-coarray" FPM_LDFLAGS="-coarray" ./test/runners/test.fpm-coarray.sh ${BUILD_DIR_PREFIX}_fpm_coarray
+          ./test/runners/test.meson-serial.sh ${BUILD_DIR_PREFIX}_meson_serial
+
+      # # Meson can not detect IntelMPI properly
+      # - name: Test Meson MPI
+      #   run: |
+      #     ./test/runners/test.meson-mpi.sh ${BUILD_DIR_PREFIX}_meson_mpi
+
+      - name: Test Meson coarray
+        run: >
+          FC_COARRAY_FLAGS="-coarray"
+          LD_COARRAY_FLAGS="-coarray"
+          ./test/runners/test.meson-coarray.sh ${BUILD_DIR_PREFIX}_meson_coarray
