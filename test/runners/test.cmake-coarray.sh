@@ -13,6 +13,8 @@ cmake\
   -GNinja\
   -B _build\
   -DCMAKE_INSTALL_PREFIX=$PWD/_install\
+  -DTESTPROJECT_COARRAY_COMPILE_FLAGS=${FFLAGS_COARRAY}\
+  -DTESTPROJECT_COARRAY_LINK_FLAGS=${LDFLAGS_COARRAY}\
   testproject/
 cmake --build _build
 ctest --test-dir _build
@@ -25,6 +27,8 @@ CMAKE_PREFIX_PATH=$PWD/_install\
   -B _build_export_cmake\
   -GNinja\
   -DFIND_BY_CMAKE=ON\
+  -DCOARRAY_COMPILE_FLAGS=${FFLAGS_COARRAY}\
+  -DCOARRAY_LINK_FLAGS=${LDFLAGS_COARRAY}\
   ${TEST_DIR}/testers/export_test.coarray
 cmake --build _build_export_cmake
 ./_build_export_cmake/app/export_test
@@ -34,6 +38,8 @@ PKG_CONFIG_PATH=$PWD/_install/lib/pkgconfig\
   -B _build_export_pkgconf\
   -GNinja\
   -DFIND_BY_CMAKE=OFF\
+  -DCOARRAY_COMPILE_FLAGS=${FFLAGS_COARRAY}\
+  -DCOARRAY_LINK_FLAGS=${LDFLAGS_COARRAY}\
   ${TEST_DIR}/testers/export_test.coarray
 cmake --build _build_export_pkgconf
 ./_build_export_pkgconf/app/export_test

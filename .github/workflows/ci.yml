@@ -103,7 +103,9 @@ jobs:
           ./test/runners/test.cmake-mpi.sh ${BUILD_DIR_PREFIX}_cmake_mpi
 
       - name: Test CMake coarray
-        run: |
+        run: >
+          FFLAGS_COARRAY="-coarray"
+          LDFLAGS_COARRAY="-coarray"
           ./test/runners/test.cmake-coarray.sh ${BUILD_DIR_PREFIX}_cmake_coarray
 
       - name: Test Fpm serial
@@ -133,6 +135,6 @@ jobs:
 
       - name: Test Meson coarray
         run: >
-          FC_COARRAY_FLAGS="-coarray"
-          LD_COARRAY_FLAGS="-coarray"
+          FFLAGS_COARRAY="-coarray"
+          LDFLAGS_COARRAY="-coarray"
           ./test/runners/test.meson-coarray.sh ${BUILD_DIR_PREFIX}_meson_coarray

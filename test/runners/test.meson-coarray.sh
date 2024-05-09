@@ -12,8 +12,8 @@ cookiecutter \
 meson setup\
  --prefix $PWD/_install\
  --libdir $PWD/_install/lib\
- -Dcoarray_flags=${FC_COARRAY_FLAGS}\
- -Dcoarray_link_flags=${LD_COARRAY_FLAGS}\
+ -Dcoarray_compile_flags=${FFLAGS_COARRAY}\
+ -Dcoarray_link_flags=${LDFLAGS_COARRAY}\
  _build testproject
 meson compile -C _build
 meson test -C _build --verbose
@@ -24,8 +24,8 @@ LD_LIBRARY_PATH="${PWD}/_install/lib:${LD_LIBRARY_PATH}"\
 
 PKG_CONFIG_PATH=$PWD/_install/lib/pkgconfig\
   meson setup\
-  -Dcoarray_flags=${FC_COARRAY_FLAGS}\
-  -Dcoarray_link_flags=${LD_COARRAY_FLAGS}\
+  -Dcoarray_compile_flags=${FFLAGS_COARRAY}\
+  -Dcoarray_link_flags=${LDFLAGS_COARRAY}\
   _build_export\
   ${TEST_DIR}/testers/export_test.coarray
 meson compile -C _build_export

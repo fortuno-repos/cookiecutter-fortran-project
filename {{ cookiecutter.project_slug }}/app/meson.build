@@ -13,7 +13,7 @@
   sources: {{cookiecutter.project_slug}}_app_sources,
   dependencies: {{cookiecutter.project_slug}}_app_deps,
 {% if cookiecutter.__coarray_code == "True" -%}
-  fortran_args: coarray_flags,
+  fortran_args: coarray_compile_flags,
   link_args: coarray_link_flags,
 {% endif %}
   install: true,

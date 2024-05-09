@@ -13,7 +13,7 @@ install_modules_dir = join_paths(get_option('includedir'), module_dir_name)
 install_modules_script = find_program(files(join_paths('config', 'meson', 'install-modules.py')))
 
 {% if cookiecutter.__coarray_code == "True" -%}
-coarray_flags = get_option('coarray_flags')
+coarray_compile_flags = get_option('coarray_compile_flags')
 coarray_link_flags = get_option('coarray_link_flags')
 {% endif %}
 
@@ -25,7 +25,7 @@ fortuno_mpi_dep = dependency('fortuno-mpi', fallback: ['fortuno-mpi', 'fortuno_m
 {%- elif cookiecutter.__coarray_code == "True" -%}
 fortuno_coarray_dep = dependency(
   'fortuno-coarray', fallback: ['fortuno-coarray', 'fortuno_coarray_dep'],
-  default_options: {'coarray_flags': coarray_flags, 'coarray_link_flags': coarray_link_flags},
+  default_options: {'coarray_compile_flags': coarray_compile_flags, 'coarray_link_flags': coarray_link_flags},
 )
 {%- endif %}
 
