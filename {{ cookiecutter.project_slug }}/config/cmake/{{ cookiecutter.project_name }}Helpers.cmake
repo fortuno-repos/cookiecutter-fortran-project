@@ -26,7 +26,7 @@ function ({{cookiecutter.project_slug}}_add_coarray_build_flags target)
 
   if (NOT TARGET CoarrayBuildInterface)
     if ({{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS)
-      set(_coarray_compile_flags "${{'{'}}{{cookiecutter.__project_slug_upper}}_COARRAY_FLAGS}")
+      set(_coarray_compile_flags "${{'{'}}{{cookiecutter.__project_slug_upper}}_coarray_compile_flags}")
     elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "IntelLLVM")
       set(_coarray_compile_flags "-coarray")
     elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "NAG")

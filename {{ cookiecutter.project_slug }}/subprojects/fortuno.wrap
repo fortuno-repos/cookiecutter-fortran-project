@@ -1,0 +1,4 @@
+[wrap-git]
+directory=fortuno
+url=https://github.com/fortuno-repos/fortuno
+revision=main

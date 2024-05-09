@@ -4,7 +4,7 @@
     "description": "A short description of the project",
     "version": "0.1.0",
     "parallelization": ["serial", "mpi", "coarray"],
-    "build_system": ["cmake", "fpm", "all"],
+    "build_system": ["cmake", "fpm", "meson", "all"],
     "with_app": true,
     "with_example": true,
 
@@ -23,7 +23,8 @@
             "__prompt__": "Which build system should the config files be generated for?",
             "cmake": "CMake",
             "fpm": "Fpm",
-            "all": "Config files for both build systems"
+            "meson": "Meson",
+            "all": "Config files for all three build systems"
         },
         "with_app": "Generate app (installable standalone program)?",
         "with_example": "Generate example (non-installable standalone program)?"

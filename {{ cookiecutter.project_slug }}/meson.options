@@ -1,0 +1,28 @@
+{% if cookiecutter.with_app -%}
+option('build_apps', type: 'boolean', value: true, description: 'Build apps')
+{%- endif %}
+
+{% if cookiecutter.with_example -%}
+option('build_examples', type: 'boolean', value: true, description: 'Build examples')
+{%- endif %}
+
+option('build_tests', type: 'boolean', value: true, description: 'Build tests')
+
+option(
+    'install_module_dir',
+    type: 'string',
+    value: 'modules',
+    description: 'Directory containing the installed module files (relative to the include directory)'
+)
+
+{% if cookiecutter.__coarray_code == "True" -%}
+option(
+  'coarray_compile_flags', type: 'array', value: [],
+  description: 'Fortran compiler arguments to use when compiling coarray sources'
+)
+
+option(
+  'coarray_link_flags', type: 'array', value: [],
+  description: 'Fortran linker arguments to use when linking coarray sources'
+)
+{% endif %}

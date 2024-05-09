@@ -1,14 +1,13 @@
-****************************
-Cookiecutter-Fortran-Project
-****************************
+*************************
+Fortran project templates
+*************************
 
-Cookiecutter-Fortran-Project offers templates for setting up a Fortran project,
-allowing you to select from various build systems (currently CMake and Fpm are
-implemented, Meson is in progress), as well as different
-parallelization models such as serial, MPI, and coarray. The resulting project
-will include a library, unit tests (utilizing the `Fortuno
-<https://fortuno.readthedocs.io>`_ unit testing framework), and optionally a
-standalone application and an example.
+Cookiecutter-fortran-project offers templates for setting up a new Fortran
+project, allowing you to select from various build systems (CMake, Fpm and
+Meson), as well as different parallelization models such as serial, MPI, and
+coarray. The resulting project will include a library, unit tests (utilizing the
+`Fortuno <https://fortuno.readthedocs.io>`_ unit testing framework), and
+optionally a standalone application and an example.
 
 
 Usage
@@ -57,13 +56,26 @@ in a new folder named according to the ``project_slug`` you provide. This folder
 will contain a complete, ready-to-build, run, test, and install project.
 
 
-Acknowledgements
-================
+Credits
+=======
 
-The initial CMake template was inspired by the publicly available `CMake
-template by Chris Le <https://github.com/LecrisUT/CMake-Template>`_.
-Additionally, valuable discussions with the author have greatly influenced its
-development.
+The templates provided by the cookiecutter-fortran-project are based on the
+experiences gained by our attempts to provide support for those build
+systems within the `Fortuno project
+<https://github.com/fortuno-repos/fortuno>`_. Various excellent publicly
+available templates and examples served as starting point.
+
+The initial CMake template was based on the  `CMake template created by Cristian
+Le <https://github.com/LecrisUT/CMake-Template>`_. Valuable in-depth discussions
+with the author have also significantly shaped its subsequent evolution.
+
+For the initial Meson template, inspiration was drawn from various Fortran
+projects created by `Sebastian Ehlert <https://github.com/awvwgk/>`_ and his
+`mod-file installer
+<https://github.com/mesonbuild/meson/issues/5374#issuecomment-830662831>`_.
+
+The template for Fpm was adapted from the `Fortran package manager
+<https://fpm.fortran-lang.org>`_'s own template.
 
 
 License

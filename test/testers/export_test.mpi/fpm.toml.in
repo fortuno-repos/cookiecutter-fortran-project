@@ -5,6 +5,11 @@ version = "0.0.0"
 name = "export_test"
 main = "export_test.f90"
 
+[fortran]
+# Enabling the implicit options seems to be necessary for using fpm with meta-dependency mpi.
+implicit-typing = true
+implicit-external = true
+
 [dependencies]
 mpi = "*"
 # This line should be added by the test.sh script with the correct path

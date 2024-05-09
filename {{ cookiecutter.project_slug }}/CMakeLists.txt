@@ -25,7 +25,7 @@ option(
 {% if cookiecutter.with_app -%}
 option(
   {{cookiecutter.__project_slug_upper}}_BUILD_APPS
-  "{{cookiecutter.project_name}}: Whether to build the app"
+  "{{cookiecutter.project_name}}: Whether to build the apps"
   ${PROJECT_IS_TOP_LEVEL}
 )
 {%- endif %}
@@ -84,7 +84,7 @@ include(FetchContent)
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/config/cmake)
 include({{cookiecutter.project_name}}Helpers)
 
 set(BUILD_SHARED_LIBS ${{'{'}}{{cookiecutter.__project_slug_upper}}_BUILD_SHARED_LIBS})
@@ -130,7 +130,7 @@ endif ()
 if ({{cookiecutter.__project_slug_upper}}_INSTALL)
 
   # pkg-config files
-  configure_file(cmake/{{cookiecutter.project_slug}}.pc.in {{cookiecutter.project_slug}}.pc @ONLY)
+  configure_file(config/cmake/{{cookiecutter.project_slug}}.pc.in {{cookiecutter.project_slug}}.pc @ONLY)
   install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/{{cookiecutter.project_slug}}.pc
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
@@ -144,7 +144,7 @@ if ({{cookiecutter.__project_slug_upper}}_INSTALL)
     COMPATIBILITY SameMajorVersion
   )
   configure_package_config_file(
-      cmake/{{cookiecutter.project_name}}Config.cmake.in
+      config/cmake/{{cookiecutter.project_name}}Config.cmake.in
       ${CMAKE_CURRENT_BINARY_DIR}/{{cookiecutter.project_name}}Config.cmake
       INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/{{cookiecutter.project_name}}
   )

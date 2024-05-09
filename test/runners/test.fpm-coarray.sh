@@ -9,7 +9,7 @@ cookiecutter \
    --replay-file ${TEST_DIR}/cc-replay/fpm-coarray.json\
     ${COOKIECUTTER_ROOT_DIR}
 
-fpm build -C testproject --verbose
+fpm build -C testproject
 fpm test -C testproject --verbose
 fpm run -C testproject --target testproject_app
 fpm run -C testproject --example testproject_example
@@ -19,5 +19,5 @@ fpm install -C testproject --prefix ${PWD}/_install
 cp -a ${TEST_DIR}/testers/export_test.coarray export_test
 cp export_test/fpm.toml.in export_test/fpm.toml
 echo "testproject = { path = \"../testproject\"}" >> export_test/fpm.toml
-fpm build -C export_test --verbose
+fpm build -C export_test
 fpm run -C export_test --target export_test
