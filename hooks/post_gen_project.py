@@ -33,9 +33,9 @@ OPTIONAL_PATHS = [
     (r"./subprojects/fortuno-mpi.wrap$", MESON_BUILD and MPI_CODE),
     (r"./subprojects/fortuno-coarray.wrap$", MESON_BUILD and COARRAY_CODE),
     (r".*/CMakeLists.txt$", CMAKE_BUILD),
-    (r"./fpm.toml$", FPM_BUILD),
+    (r".*/fpm.toml$", FPM_BUILD),
     (r".*/meson.build$", MESON_BUILD),
-    (r".*/meson_options$", MESON_BUILD),
+    (r".*/meson.options$", MESON_BUILD),
 ]
 
 
