@@ -8,7 +8,9 @@ Meson) and different parallelization models such as serial, MPI, and coarray.
 The generated projects are designed to embody best practices for new Fortran
 projects. They include a library, unit tests (currently utilizing the `Fortuno
 unit test framework <https://github.com/fortuno-repos/fortuno>`_), and
-optionally, a standalone application and an example.
+optionally, a standalone application and an example. The generated projects
+contain the essential configuration files and source code needed to be fully
+functional and ready to build, test, and install.
 
 
 Generating a Fortran project
