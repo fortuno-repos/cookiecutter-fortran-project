@@ -1,11 +1,11 @@
 testapp_sources = files(['testapp.f90'])
 
 {% if cookiecutter.__serial_code == "True" -%}
-testapp_deps = [testproject_dep, fortuno_serial_dep]
+testapp_deps = [{{cookiecutter.project_slug}}_dep, fortuno_serial_dep]
 {%- elif cookiecutter.__mpi_code == "True" -%}
-testapp_deps = [testproject_dep, fortuno_mpi_dep, mpi_fortran_dep]
+testapp_deps = [{{cookiecutter.project_slug}}_dep, fortuno_mpi_dep, mpi_fortran_dep]
 {%- elif cookiecutter.__coarray_code == "True" -%}
-testapp_deps = [testproject_dep, fortuno_coarray_dep]
+testapp_deps = [{{cookiecutter.project_slug}}_dep, fortuno_coarray_dep]
 {%- endif %}
 
 testapp_exe = executable(
