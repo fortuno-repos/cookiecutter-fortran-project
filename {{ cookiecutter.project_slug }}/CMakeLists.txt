@@ -69,11 +69,12 @@ set(
 option(
   {{cookiecutter.__project_slug_upper}}_SUBPROJECT_REQUIRE_FIND
   "{{cookiecutter.project_name}}: Require find_package for all subprojects"
-  FALSE
+  OFF
 )
 option(
   {{cookiecutter.__project_slug_upper}}_SUBPROJECT_DISABLE_FIND
   "{{cookiecutter.project_name}}: Disable find_package for all subprojects"
+  OFF
 )
 
 #[=============================================================================[

@@ -3,9 +3,9 @@
 ])
 
 {% if cookiecutter.__mpi_code == "True" -%}
-{{cookiecutter.project_slug}}_example_deps = [testproject_dep, mpi_fortran_dep]
+{{cookiecutter.project_slug}}_example_deps = [{{cookiecutter.project_slug}}_dep, mpi_fortran_dep]
 {%- else -%}
-{{cookiecutter.project_slug}}_example_deps = [testproject_dep]
+{{cookiecutter.project_slug}}_example_deps = [{{cookiecutter.project_slug}}_dep]
 {%- endif %}
 
 {{cookiecutter.project_slug}}_example_exe = executable(
