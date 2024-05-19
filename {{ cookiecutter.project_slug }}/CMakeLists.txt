@@ -55,13 +55,13 @@ set(
 {% if cookiecutter.parallelization == "coarray" -%}
 set(
   {{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS
-  ""
+  "-coarray"
   CACHE STRING
   "{{cookiecutter.project_name}}: Extra flags to use for compiling coarray source files"
 )
 set(
   {{cookiecutter.__project_slug_upper}}_COARRAY_LINK_FLAGS
-  ""
+  "-coarray"
   CACHE STRING
   "{{cookiecutter.project_name}}: Extra flags to use for linking coarray object files"
 )

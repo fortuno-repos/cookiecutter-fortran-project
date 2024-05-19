@@ -21,31 +21,32 @@ endfunction ()
 
 
 {% if cookiecutter.__coarray_code == "True" -%}
-# Applies coarray build flags to the target
-function ({{cookiecutter.project_slug}}_add_coarray_build_flags target)
+# Creates the target CoarrayBuildInterface with coarray build options
+function ({{cookiecutter.project_slug}}_create_coarray_build_target)
 
   if (NOT TARGET CoarrayBuildInterface)
-    if ({{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS)
-      set(_coarray_compile_flags "${{'{'}}{{cookiecutter.__project_slug_upper}}_coarray_compile_flags}")
-    elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "IntelLLVM")
-      set(_coarray_compile_flags "-coarray")
-    elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "NAG")
-      set(_coarray_compile_flags "-coarray")
-    endif ()
-
-    if ({{cookiecutter.__project_slug_upper}}_COARRAY_LINK_FLAGS)
-      set(_coarray_link_flags "${{'{'}}{{cookiecutter.__project_slug_upper}}_COARRAY_LINK_FLAGS}")
-    elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "IntelLLVM")
-      set(_coarray_link_flags "-coarray")
-    elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "NAG")
-      set(_coarray_link_flags "-coarray")
-    endif ()
-
     add_library(CoarrayBuildInterface INTERFACE)
-    target_compile_options(CoarrayBuildInterface INTERFACE ${_coarray_compile_flags})
-    target_link_options(CoarrayBuildInterface INTERFACE ${_coarray_link_flags})
+    target_compile_options(
+      CoarrayBuildInterface INTERFACE
+      ${{'{'}}{{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS}
+    )
+    target_link_options(
+      CoarrayBuildInterface INTERFACE
+      ${{'{'}}{{cookiecutter.__project_slug_upper}}_COARRAY_LINK_FLAGS}
+    )
   endif ()
 
+endfunction ()
+
+
+# Applies coarray build flags to a target
+function ({{cookiecutter.project_slug}}_add_coarray_build_flags target)
+
+  {{cookiecutter.project_slug}}_create_coarray_build_target()
+
+  # TODO: Delete first branch once cmake minimum version is 3.26 or above
+  # Older CMake versions have problems during installation if the CoarrayBuildInterface target is
+  # linked directly with any target, therefore applying a workaround.
   if (CMAKE_VERSION VERSION_LESS 3.26)
     get_target_property(_compile_flags CoarrayBuildInterface INTERFACE_COMPILE_OPTIONS)
     if (_compile_flags)
