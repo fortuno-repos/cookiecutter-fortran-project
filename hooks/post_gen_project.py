@@ -22,8 +22,8 @@ WITH_EXAMPLE = {{cookiecutter.with_example}}
 # matches a path and the corresponding boolean value is False, the path is removed.
 OPTIONAL_PATHS = [
     (r"./app$", WITH_APP),
-    (r"./config/cmake$", CMAKE_BUILD),
-    (r"./config/meson$", MESON_BUILD),
+    (r"./cmake$", CMAKE_BUILD),
+    (r"./meson$", MESON_BUILD),
     (r"./example$", WITH_EXAMPLE),
     (r"./subprojects$", CMAKE_BUILD or MESON_BUILD),
     (r"./subprojects/Fortuno.cmake$", CMAKE_BUILD and SERIAL_CODE),

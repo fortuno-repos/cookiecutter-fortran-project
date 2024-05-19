@@ -10,7 +10,7 @@ project(
 # based projects would not be able to find the installed module files then.
 module_dir_name = get_option('install_module_dir')
 install_modules_dir = join_paths(get_option('includedir'), module_dir_name)
-install_modules_script = find_program(files(join_paths('config', 'meson', 'install-modules.py')))
+install_modules_script = find_program(files(join_paths('meson', 'install-modules.py')))
 
 {% if cookiecutter.__coarray_code == "True" -%}
 coarray_compile_flags = get_option('coarray_compile_flags')
