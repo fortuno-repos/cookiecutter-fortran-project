@@ -22,12 +22,25 @@ Prerequisites
 You must have cookiecutter and Python installed on your system in order to
 generate Fortran projects with *Cookiecutter-Fortran-project*. If cookiecutter
 is not installed yet, you can obtain and install it using the pip installation
-tool distributed with Python. For Linux users, this can be easily accomplished
-with the command
+tool distributed with Python. On Linux and macOS this can be easily
+accomplished with the following commands:
 
 .. code-block::
 
-    pip install --user cookiecutter
+    mkdir -p ~/opt/venv
+    python3 -m venv ~/opt/venv/cookiecutter
+    source ~/opt/venv/cookiecutter/bin/activate
+    pip install cookiecutter
+
+This installs cookiecutter in a virtual Python environment created in the
+directory ``~/opt/venv/cookiecutter``. Note, that whenever you open a new shell,
+you have to execute
+
+.. code-block::
+
+    source ~/opt/venv/cookiecutter/bin/activate
+
+in order to obtain access to the installed cookiecutter script.
 
 For other operating systems and further ways of installing cookiecutter, consult
 the `cookiecutter installation instructions
