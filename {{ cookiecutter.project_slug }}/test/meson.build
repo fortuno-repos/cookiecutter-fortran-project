@@ -12,5 +12,9 @@ testapp_exe = executable(
   'testapp',
   sources: testapp_sources,
   dependencies: testapp_deps,
+{% if cookiecutter.__coarray_code == "True" -%}
+  fortran_args: coarray_compile_flags,
+  link_args: coarray_link_flags,
+{% endif %}
 )
 test('testapp', testapp_exe)
