@@ -4,19 +4,19 @@ project(export_test LANGUAGES Fortran)
 
 option(FIND_BY_CMAKE "Use find_package() to find installed project (otherwise pkg-config)" ON)
 
-set(COARRAY_COMPILE_FLAGS "" CACHE STRING "Extra flags to use for compiling coarray source files")
+set(FFLAGS_COARRAY "" CACHE STRING "Extra flags to use for compiling coarray source files")
 
-set(COARRAY_LINK_FLAGS "" CACHE STRING "Extra flags to use for linking coarray object files")
+set(LDFFLAGS_COARRAY "" CACHE STRING "Extra flags to use for linking coarray object files")
 
-if (COARRAY_COMPILE_FLAGS)
-  set(_coarray_compile_flags "${COARRAY_COMPILE_FLAGS}")
+if (FFLAGS_COARRAY)
+  set(_fflags_coarray "${FFLAGS_COARRAY}")
 elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "IntelLLVM")
-  set(_coarray_compile_flags "-coarray")
+  set(_fflags_coarray "-coarray")
 endif ()
-if (COARRAY_LINK_FLAGS)
-  set(_coarray_link_flags "${COARRAY_LINK_FLAGS}")
+if (LDFLAGS_COARRAY)
+  set(_ldflags_coarray "${LDFLAGS_COARRAY}")
 elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "IntelLLVM")
-  set(_coarray_link_flags "-coarray")
+  set(_ldflags_coarray "-coarray")
 endif ()
 
 if (FIND_BY_CMAKE)

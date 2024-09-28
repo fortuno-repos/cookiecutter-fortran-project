@@ -121,11 +121,11 @@ with the uppercase version of your project's slug.)
   Name of the subdirectory to put the installed module files into. Default:
   ``modules``.
 
-``<PROJECTSLUG>_COARRAY_COMPILE_FLAGS``
-  Compiler flags to use when compiling coarray source code (only available if
-  the coarray template was chosen). Default: ``-coarray``.
+``<PROJECTSLUG>_FFLAGS_COARRAY``
+  Fortran compiler flags to use when compiling coarray source code (only
+  available if the coarray template was chosen). Default: ``-coarray``.
 
-``<PROJECTSLUG>_COARRAY_LINK_FLAGS``
+``<PROJECTSLUG>_LDFLAGS_COARRAY``
   Linker flags to use when linking coarray object files (only available if
   the coarray template was chosen). Default: ``-coarray``.
 
@@ -263,11 +263,11 @@ during the configuration step.
   the include folder. Therefore, the specified directory will be relative to
   that folder. Default: ``modules``.
 
-``coarray_compile_flags``
+``fflags_coarray``
   Compiler flags to use when compiling coarray source code (only available if
   the coarray template was chosen). Default: ``-coarray``.
 
-``coarray_link_flags``
+``ldflags_coarray``
   Linker flags to use when linking coarray object files (only available if
   the coarray template was chosen). Default: ``-coarray``.
 

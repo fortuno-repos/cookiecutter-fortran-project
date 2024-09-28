@@ -28,11 +28,11 @@ function ({{cookiecutter.project_slug}}_create_coarray_build_target)
     add_library(CoarrayBuildInterface INTERFACE)
     target_compile_options(
       CoarrayBuildInterface INTERFACE
-      ${{'{'}}{{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS}
+      ${{'{'}}{{cookiecutter.__project_slug_upper}}_FFLAGS_COARRAY}
     )
     target_link_options(
       CoarrayBuildInterface INTERFACE
-      ${{'{'}}{{cookiecutter.__project_slug_upper}}_COARRAY_LINK_FLAGS}
+      ${{'{'}}{{cookiecutter.__project_slug_upper}}_LDFLAGS_COARRAY}
     )
   endif ()
 

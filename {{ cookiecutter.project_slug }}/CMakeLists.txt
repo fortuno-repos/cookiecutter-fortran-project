@@ -54,13 +54,13 @@ set(
 )
 {% if cookiecutter.parallelization == "coarray" -%}
 set(
-  {{cookiecutter.__project_slug_upper}}_COARRAY_COMPILE_FLAGS
+  {{cookiecutter.__project_slug_upper}}_FFLAGS_COARRAY
   "-coarray"
   CACHE STRING
   "{{cookiecutter.project_name}}: Extra flags to use for compiling coarray source files"
 )
 set(
-  {{cookiecutter.__project_slug_upper}}_COARRAY_LINK_FLAGS
+  {{cookiecutter.__project_slug_upper}}_LDFLAGS_COARRAY
   "-coarray"
   CACHE STRING
   "{{cookiecutter.project_name}}: Extra flags to use for linking coarray object files"
@@ -112,13 +112,7 @@ if ({{cookiecutter.__project_slug_upper}}_BUILD_EXAMPLES)
 endif ()
 {%- endif %}
 if ({{cookiecutter.__project_slug_upper}}_BUILD_TESTS)
-  {% if cookiecutter.parallelization == "serial" -%}
   include(subprojects/Fortuno.cmake)
-  {%- elif cookiecutter.parallelization == "mpi" -%}
-  include(subprojects/FortunoMpi.cmake)
-  {%- elif cookiecutter.parallelization == "coarray" -%}
-  include(subprojects/FortunoCoarray.cmake)
-  {%- endif %}
   enable_testing()
   add_subdirectory(test)
 endif ()

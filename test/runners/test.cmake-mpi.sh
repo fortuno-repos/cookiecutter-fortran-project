@@ -29,7 +29,7 @@ CMAKE_PREFIX_PATH=$PWD/_install\
 cmake --build _build_export_cmake
 mpirun -n 2 ./_build_export_cmake/app/export_test
 
-PKG_CONFIG_PATH=$PWD/_install/lib/pkgconfig\
+PKG_CONFIG_PATH=$PWD/_install/${LIB_DIR}/pkgconfig\
   cmake\
   -B _build_export_pkgconf\
   -GNinja\

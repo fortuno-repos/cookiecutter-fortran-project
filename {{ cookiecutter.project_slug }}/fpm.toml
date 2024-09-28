@@ -37,9 +37,9 @@ mpi = "*"
 
 [dev-dependencies]
 {% if cookiecutter.__serial_code == "True" -%}
-fortuno = { git = "https://github.com/fortuno-repos/fortuno.git" }
+fortuno = { git = "https://github.com/fortuno-repos/fortuno-fpm-serial.git" }
 {%- elif cookiecutter.__mpi_code == "True" -%}
-fortuno-mpi = { git = "https://github.com/fortuno-repos/fortuno-mpi.git" }
+fortuno-mpi = { git = "https://github.com/fortuno-repos/fortuno-fpm-mpi.git" }
 {%- elif cookiecutter.__coarray_code == "True" -%}
-fortuno-coarray = { git = "https://github.com/fortuno-repos/fortuno-coarray.git" }
+fortuno-coarray = { git = "https://github.com/fortuno-repos/fortuno-fpm-coarray.git" }
 {%- endif %}

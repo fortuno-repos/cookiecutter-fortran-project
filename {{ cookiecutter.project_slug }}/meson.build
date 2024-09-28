@@ -13,19 +13,28 @@ install_modules_dir = join_paths(get_option('includedir'), module_dir_name)
 install_modules_script = find_program(files(join_paths('meson', 'install-modules.py')))
 
 {% if cookiecutter.__coarray_code == "True" -%}
-coarray_compile_flags = get_option('coarray_compile_flags')
-coarray_link_flags = get_option('coarray_link_flags')
+fflags_coarray = get_option('fflags_coarray')
+ldflags_coarray = get_option('ldflags_coarray')
 {% endif %}
 
 {% if cookiecutter.__serial_code == "True" -%}
 fortuno_serial_dep = dependency('fortuno-serial', fallback: ['fortuno', 'fortuno_serial_dep'])
 {%- elif cookiecutter.__mpi_code == "True" -%}
 mpi_fortran_dep = dependency('mpi', language: 'fortran', required: true)
-fortuno_mpi_dep = dependency('fortuno-mpi', fallback: ['fortuno-mpi', 'fortuno_mpi_dep'])
+fortuno_mpi_dep = dependency(
+  'fortuno-mpi',
+  fallback: ['fortuno', 'fortuno_mpi_dep'],
+  default_options: {'with_mpi': true}
+)
 {%- elif cookiecutter.__coarray_code == "True" -%}
 fortuno_coarray_dep = dependency(
-  'fortuno-coarray', fallback: ['fortuno-coarray', 'fortuno_coarray_dep'],
-  default_options: {'coarray_compile_flags': coarray_compile_flags, 'coarray_link_flags': coarray_link_flags},
+  'fortuno-coarray',
+  fallback: ['fortuno', 'fortuno_coarray_dep'],
+  default_options: {
+    'with_coarray': true,
+    'fflags_coarray': fflags_coarray,
+    'ldflags_coarray': ldflags_coarray,
+  },
 )
 {%- endif %}
 

@@ -1,9 +1,9 @@
 option(
-  'coarray_compile_flags', type: 'array', value: [],
+  'fflags_coarray', type: 'array', value: [],
   description: 'Fortran compiler arguments to use when compiling coarray sources'
 )
 
 option(
-  'coarray_link_flags', type: 'array', value: [],
+  'ldflags_coarray', type: 'array', value: [],
   description: 'Fortran linker arguments to use when linking coarray sources'
 )

@@ -2,6 +2,12 @@
 set -e -v -x
 
 SCRIPT_DIR="$(readlink -f $(dirname ${BASH_SOURCE[0]}))"
+DISTRO_ID=$(python3 -c "import platform; print(platform.freedesktop_os_release()['ID'])")
+if [[ "${DISTRO_ID}" =~ ^(ubuntu|debian)$ ]]; then
+  LIB_DIR="lib"
+else
+  LIB_DIR="lib64"
+fi
 
 source ${SCRIPT_DIR}/init.sh
 
@@ -29,7 +35,7 @@ CMAKE_PREFIX_PATH=$PWD/_install\
 cmake --build _build_export_cmake
 ./_build_export_cmake/app/export_test
 
-PKG_CONFIG_PATH=$PWD/_install/lib/pkgconfig\
+PKG_CONFIG_PATH=$PWD/_install/${LIB_DIR}/pkgconfig\
   cmake\
   -B _build_export_pkgconf\
   -GNinja\

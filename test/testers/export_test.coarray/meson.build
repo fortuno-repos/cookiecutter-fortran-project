@@ -4,8 +4,8 @@ project(
   version: '0.0.0'
 )
 
-coarray_compile_flags = get_option('coarray_compile_flags')
-coarray_link_flags = get_option('coarray_link_flags')
+fflags_coarray = get_option('fflags_coarray')
+ldflags_coarray = get_option('ldflags_coarray')
 
 testproject_dep = dependency('testproject', required: true)
 

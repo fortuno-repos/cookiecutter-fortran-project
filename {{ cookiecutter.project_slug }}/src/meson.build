@@ -14,8 +14,8 @@
   sources: {{cookiecutter.project_slug}}_sources,
   dependencies: {{cookiecutter.project_slug}}_deps,
 {% if cookiecutter.__coarray_code == "True" -%}
-  fortran_args: coarray_compile_flags,
-  link_args: coarray_link_flags,
+  fortran_args: fflags_coarray,
+  link_args: ldflags_coarray,
 {% endif %}
   install: true,
 )

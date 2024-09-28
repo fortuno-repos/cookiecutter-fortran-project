@@ -8,6 +8,12 @@ option(
   FORTUNO_BUILD_SHARED_LIBS "Fortuno: Build as shared library" ${{'{'}}{{cookiecutter.__project_slug_upper}}_BUILD_SHARED_LIBS}
 )
 
+{% if cookiecutter.__mpi_code == "True" -%}
+option(FORTUNO_WITH_MPI "Fortuno: whether to build the MPI interface" ON)
+{%- elif cookiecutter.__coarray_code == "True" -%}
+option(FORTUNO_WITH_COARRAY "Fortuno: whether to build the coarray interface" ON)
+{%- endif %}
+
 # Make subproject available
 FetchContent_Declare(
   Fortuno

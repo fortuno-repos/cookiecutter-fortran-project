@@ -1,16 +1,20 @@
-program testapp
+module test_{{cookiecutter.project_slug}}
   use {{cookiecutter.project_slug}}, only : broadcast
   use fortuno_coarray, only : as_char, test => coa_pure_case_item, context => coa_context,&
-      & execute_coa_cmd_app, is_equal, test_item
+      & is_equal, test_list
   implicit none
 
-  call execute_coa_cmd_app(&
-    testitems=[&
-      test("broadcast", test_broadcast)&
-    ]&
-  )
-
 contains
+
+  function tests()
+    type(test_list) :: tests
+
+    tests = test_list([&
+       test("broadcast", test_broadcast)&
+    ])
+
+  end function tests
+
 
   subroutine test_broadcast(ctx)
     class(context), intent(inout) :: ctx
@@ -32,5 +36,15 @@ contains
     call ctx%check(is_equal(buffer, sourceval))
 
   end subroutine test_broadcast
+
+end module test_{{cookiecutter.project_slug}}
+
+
+program testapp
+  use fortuno_coarray, only : execute_coa_cmd_app
+  use test_{{cookiecutter.project_slug}}, only : tests
+  implicit none
+
+  call execute_coa_cmd_app(tests())
 
 end program testapp
