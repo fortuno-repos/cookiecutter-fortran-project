@@ -2,18 +2,19 @@
     "cookiecutter": {
         "project_name": "TestProject",
         "project_slug": "testproject",
-        "description": "Fpm based build of coarray-parallelized code",
+        "description": "CMake based build of serial code",
         "version": "0.0.0",
-        "parallelization": "mpi",
-        "build_system": "fpm",
+        "parallelization": "serial",
+        "build_system": "cmake",
+        "unit_testing": "none",
         "with_app": true,
         "with_example": true,
         "__project_slug_upper": "TESTPROJECT",
-        "__cmake_build": "False",
-        "__fpm_build": "True",
+        "__cmake_build": "True",
+        "__fpm_build": "False",
         "__meson_build": "False",
-        "__serial_code": "False",
+        "__serial_code": "True",
         "__mpi_code": "False",
-        "__coarray_code": "True"
+        "__coarray_code": "False"
     }
 }

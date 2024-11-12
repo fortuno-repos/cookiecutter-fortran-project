@@ -6,6 +6,7 @@
         "version": "0.0.0",
         "parallelization": "mpi",
         "build_system": "meson",
+        "unit_testing": "fortuno",
         "with_app": true,
         "with_example": true,
         "__project_slug_upper": "TESTPROJECT",

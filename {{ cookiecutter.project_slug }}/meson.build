@@ -15,12 +15,16 @@ install_modules_script = find_program(files(join_paths('meson', 'install-modules
 {% if cookiecutter.__coarray_code == "True" -%}
 fflags_coarray = get_option('fflags_coarray')
 ldflags_coarray = get_option('ldflags_coarray')
-{% endif %}
+{%- endif %}
 
+{% if cookiecutter.__mpi_code == "True" -%}
+mpi_fortran_dep = dependency('mpi', language: 'fortran', required: true)
+{%- endif %}
+
+{% if cookiecutter.unit_testing == "fortuno" -%}
 {% if cookiecutter.__serial_code == "True" -%}
 fortuno_serial_dep = dependency('fortuno-serial', fallback: ['fortuno', 'fortuno_serial_dep'])
 {%- elif cookiecutter.__mpi_code == "True" -%}
-mpi_fortran_dep = dependency('mpi', language: 'fortran', required: true)
 fortuno_mpi_dep = dependency(
   'fortuno-mpi',
   fallback: ['fortuno', 'fortuno_mpi_dep'],
@@ -36,6 +40,7 @@ fortuno_coarray_dep = dependency(
     'ldflags_coarray': ldflags_coarray,
   },
 )
+{%- endif %}
 {%- endif %}
 
 pkg = import('pkgconfig')
@@ -53,6 +58,8 @@ subdir('example')
 endif
 {% endif %}
 
+{% if cookiecutter.unit_testing != "none" -%}
 if get_option('build_tests')
   subdir('test')
 endif
+{%- endif %}

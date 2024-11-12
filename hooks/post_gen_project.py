@@ -17,6 +17,9 @@ COARRAY_CODE = {{ cookiecutter.__coarray_code }}
 WITH_APP = {{cookiecutter.with_app}}
 WITH_EXAMPLE = {{cookiecutter.with_example}}
 
+WITH_TEST = "{{cookiecutter.unit_testing}}" != "none"
+WITH_FORTUNO = "{{cookiecutter.unit_testing}}" == "fortuno"
+
 # List of optional paths to keep or to remove
 # Each tuple contains a regular expression pattern and a boolean value. If the regular expression
 # matches a path and the corresponding boolean value is False, the path is removed.
@@ -25,9 +28,10 @@ OPTIONAL_PATHS = [
     (r"./cmake$", CMAKE_BUILD),
     (r"./meson$", MESON_BUILD),
     (r"./example$", WITH_EXAMPLE),
-    (r"./subprojects$", CMAKE_BUILD or MESON_BUILD),
-    (r"./subprojects/Fortuno.cmake$", CMAKE_BUILD),
-    (r"./subprojects/fortuno.wrap$", MESON_BUILD),
+    (r"./subprojects$", (CMAKE_BUILD or MESON_BUILD) and WITH_TEST),
+    (r"./subprojects/Fortuno.cmake$", CMAKE_BUILD and WITH_FORTUNO),
+    (r"./subprojects/fortuno.wrap$", MESON_BUILD and WITH_FORTUNO),
+    (r"./test", WITH_TEST),
     (r".*/CMakeLists.txt$", CMAKE_BUILD),
     (r".*/fpm.toml$", FPM_BUILD),
     (r".*/meson.build$", MESON_BUILD),
