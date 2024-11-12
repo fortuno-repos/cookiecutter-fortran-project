@@ -7,7 +7,7 @@ projects, allowing you to choose among others
 
 * the build system (CMake, Fpm or Meson), and
 
-* the parallelization model such as (serial, MPI, coarray).
+* the parallelization model (serial, MPI, coarray).
 
 The generated projects are designed to embody best practices for new Fortran
 projects. They include a library, optional unit tests (currently utilizing the
