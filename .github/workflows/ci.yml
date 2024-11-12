@@ -43,28 +43,33 @@ jobs:
 
       - name: Test CMake serial
         run: |
-          ./test/runners/test.cmake-serial.sh ${BUILD_DIR_PREFIX}_cmake_serial
+          ./test/runners/test.cmake.sh serial none ${BUILD_DIR_PREFIX}_cmake_serial_none
+          ./test/runners/test.cmake.sh serial fortuno ${BUILD_DIR_PREFIX}_cmake_serial_fortuno
 
       # # CMake can not detect OpenMPI on Ubuntu 22.04 due to broken CMake export file
       # - name: Test CMake MPI
       #   run: |
-      #     ./test/runners/test.cmake-mpi.sh ${BUILD_DIR_PREFIX}_cmake_mpi
+      #     ./test/runners/test.cmake.sh mpi fortuno ${BUILD_DIR_PREFIX}_cmake_mpi_fortuno
 
       - name: Test Fpm serial
         run: |
-          ./test/runners/test.fpm-serial.sh ${BUILD_DIR_PREFIX}_fpm_serial
+          ./test/runners/test.fpm.sh serial none ${BUILD_DIR_PREFIX}_fpm_serial_none
+          ./test/runners/test.fpm.sh serial fortuno ${BUILD_DIR_PREFIX}_fpm_serial_fortuno
 
       - name: Test Fpm MPI
         run: |
-          ./test/runners/test.fpm-mpi.sh ${BUILD_DIR_PREFIX}_fpm_mpi
+          ./test/runners/test.fpm.sh mpi none ${BUILD_DIR_PREFIX}_fpm_mpi_none
+          ./test/runners/test.fpm.sh mpi fortuno ${BUILD_DIR_PREFIX}_fpm_mpi_fortuno
 
       - name: Test Meson serial
         run: |
-          ./test/runners/test.meson-serial.sh ${BUILD_DIR_PREFIX}_meson_serial
+          ./test/runners/test.meson.sh serial none ${BUILD_DIR_PREFIX}_meson_serial_none
+          ./test/runners/test.meson.sh serial fortuno ${BUILD_DIR_PREFIX}_meson_serial_fortuno
 
       - name: Test Meson MPI
         run: |
-          ./test/runners/test.meson-serial.sh ${BUILD_DIR_PREFIX}_meson_mpi
+          ./test/runners/test.meson.sh mpi none ${BUILD_DIR_PREFIX}_meson_mpi_none
+          ./test/runners/test.meson.sh mpi fortuno ${BUILD_DIR_PREFIX}_meson_mpi_fortuno
 
 
   intel-impi:
@@ -79,9 +84,10 @@ jobs:
       - name: Setup Intel/IntelMPI toolchain
         uses: rscohn2/setup-oneapi@v0
         with:
+          # Restricting to 2024 as fpm fails to build MPI-programs with oneAPI 2025.0
           components: |
-            ifx
-            impi
+            ifx@2024.2.1
+            impi@2021.13.1
 
       - name: Setup Intel/IntelMPI environment
         run: |
@@ -96,45 +102,48 @@ jobs:
 
       - name: Test CMake serial
         run: |
-          ./test/runners/test.cmake-serial.sh ${BUILD_DIR_PREFIX}_cmake_serial
+          ./test/runners/test.cmake.sh serial none ${BUILD_DIR_PREFIX}_cmake_serial_none
+          ./test/runners/test.cmake.sh serial fortuno ${BUILD_DIR_PREFIX}_cmake_serial_fortuno
 
       - name: Test CMake MPI
         run: |
-          ./test/runners/test.cmake-mpi.sh ${BUILD_DIR_PREFIX}_cmake_mpi
+          ./test/runners/test.cmake.sh mpi none ${BUILD_DIR_PREFIX}_cmake_mpi_none
+          ./test/runners/test.cmake.sh mpi fortuno ${BUILD_DIR_PREFIX}_cmake_mpi_fortuno
 
       - name: Test CMake coarray
-        run: >
-          FFLAGS_COARRAY="-coarray"
-          LDFLAGS_COARRAY="-coarray"
-          ./test/runners/test.cmake-coarray.sh ${BUILD_DIR_PREFIX}_cmake_coarray
+        run: |
+          FFLAGS_COARRAY="-coarray" LDFLAGS_COARRAY="-coarray" ./test/runners/test.cmake.sh coarray none ${BUILD_DIR_PREFIX}_cmake_coarray_none
+          FFLAGS_COARRAY="-coarray" LDFLAGS_COARRAY="-coarray" ./test/runners/test.cmake.sh coarray fortuno ${BUILD_DIR_PREFIX}_cmake_coarray_fortuno
 
       - name: Test Fpm serial
         run: |
-          ./test/runners/test.fpm-serial.sh ${BUILD_DIR_PREFIX}_fpm_serial
+          ./test/runners/test.fpm.sh serial none ${BUILD_DIR_PREFIX}_fpm_serial_none
+          ./test/runners/test.fpm.sh serial fortuno ${BUILD_DIR_PREFIX}_fpm_serial_fortuno
 
       - name: Test Fpm MPI
         # Workaround for IntelMPI: FPM uses compiler flags (-standard-semantics) which makes
         # compiled binary incompatible with IntelMPI. Overriding with some dummy flags.
         run: |
-          FPM_FFLAGS="-stand f18" ./test/runners/test.fpm-mpi.sh ${BUILD_DIR_PREFIX}_fpm_mpi
+          FPM_FFLAGS="-stand f18" ./test/runners/test.fpm.sh mpi none ${BUILD_DIR_PREFIX}_fpm_mpi_none
+          FPM_FFLAGS="-stand f18" ./test/runners/test.fpm.sh mpi fortuno ${BUILD_DIR_PREFIX}_fpm_mpi_fortuno
 
       - name: Test Fpm coarray
-        run: >
-          FPM_FFLAGS="-coarray"
-          FPM_LDFLAGS="-coarray"
-          ./test/runners/test.fpm-coarray.sh ${BUILD_DIR_PREFIX}_fpm_coarray
+        run: |
+          FFLAGS_COARRAY="-coarray" LDFLAGS_COARRAY="-coarray" ./test/runners/test.fpm.sh coarray none ${BUILD_DIR_PREFIX}_fpm_coarray_none
+          FFLAGS_COARRAY="-coarray" LDFLAGS_COARRAY="-coarray" ./test/runners/test.fpm.sh coarray fortuno ${BUILD_DIR_PREFIX}_fpm_coarray_fortuno
 
       - name: Test Meson serial
         run: |
-          ./test/runners/test.meson-serial.sh ${BUILD_DIR_PREFIX}_meson_serial
+          ./test/runners/test.meson.sh serial none ${BUILD_DIR_PREFIX}_meson_serial_none
+          ./test/runners/test.meson.sh serial fortuno ${BUILD_DIR_PREFIX}_meson_serial_fortuno
 
       # # Meson can not detect IntelMPI properly
       # - name: Test Meson MPI
       #   run: |
-      #     ./test/runners/test.meson-mpi.sh ${BUILD_DIR_PREFIX}_meson_mpi
+      #     ./test/runners/test.meson.sh mpi none ${BUILD_DIR_PREFIX}_meson_mpi_none
+      #     ./test/runners/test.meson.sh mpi fortuno ${BUILD_DIR_PREFIX}_meson_mpi_fortuno
 
       - name: Test Meson coarray
-        run: >
-          FFLAGS_COARRAY="-coarray"
-          LDFLAGS_COARRAY="-coarray"
-          ./test/runners/test.meson-coarray.sh ${BUILD_DIR_PREFIX}_meson_coarray
+        run: |
+          FFLAGS_COARRAY="-coarray" LDFLAGS_COARRAY="-coarray" ./test/runners/test.meson.sh coarray none ${BUILD_DIR_PREFIX}_meson_coarray_none
+          FFLAGS_COARRAY="-coarray" LDFLAGS_COARRAY="-coarray" ./test/runners/test.meson.sh coarray fortuno ${BUILD_DIR_PREFIX}_meson_coarray_fortuno

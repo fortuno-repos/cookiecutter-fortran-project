@@ -3,14 +3,18 @@ Fortran project templates
 *************************
 
 *Cookiecutter-Fortran-project* provides templates for setting up new Fortran
-projects, allowing you to choose from various build systems (CMake, Fpm, and
-Meson) and different parallelization models such as serial, MPI, and coarray.
+projects, allowing you to choose among others
+
+* the build system (CMake, Fpm or Meson), and
+
+* the parallelization model such as (serial, MPI, coarray).
+
 The generated projects are designed to embody best practices for new Fortran
-projects. They include a library, unit tests (currently utilizing the `Fortuno
-unit test framework <https://github.com/fortuno-repos/fortuno>`_), and
-optionally, a standalone application and an example. The generated projects
-contain the essential configuration files and source code needed to be fully
-functional and ready to build, test, and install.
+projects. They include a library, optional unit tests (currently utilizing the
+`Fortuno unit test framework <https://github.com/fortuno-repos/fortuno>`_), as
+well a standalone application and an example (both also optional). The generated
+projects contain the essential configuration files and source code needed to be
+fully functional and ready to build, test, and install.
 
 
 Generating a Fortran project

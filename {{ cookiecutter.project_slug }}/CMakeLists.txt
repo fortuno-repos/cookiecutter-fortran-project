@@ -36,11 +36,13 @@ option(
   ${PROJECT_IS_TOP_LEVEL}
 )
 {%- endif %}
+{% if cookiecutter.unit_testing != "none" -%}
 option(
   {{cookiecutter.__project_slug_upper}}_BUILD_TESTS
   "{{cookiecutter.project_name}}: Whether to build the tests"
   ${PROJECT_IS_TOP_LEVEL}
 )
+{%- endif %}
 option(
   {{cookiecutter.__project_slug_upper}}_INSTALL
   "{{cookiecutter.project_name}}: Install project"
@@ -111,11 +113,15 @@ if ({{cookiecutter.__project_slug_upper}}_BUILD_EXAMPLES)
   add_subdirectory(example)
 endif ()
 {%- endif %}
+{% if cookiecutter.unit_testing != "none" -%}
 if ({{cookiecutter.__project_slug_upper}}_BUILD_TESTS)
+  {% if cookiecutter.unit_testing == "fortuno" -%}
   include(subprojects/Fortuno.cmake)
+  {%- endif %}
   enable_testing()
   add_subdirectory(test)
 endif ()
+{%- endif %}
 
 
 #[=============================================================================[

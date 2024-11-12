@@ -6,6 +6,7 @@
         "version": "0.0.0",
         "parallelization": "mpi",
         "build_system": "cmake",
+        "unit_testing": "none",
         "with_app": true,
         "with_example": true,
         "__project_slug_upper": "TESTPROJECT",

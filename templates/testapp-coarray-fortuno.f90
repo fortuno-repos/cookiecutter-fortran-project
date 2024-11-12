@@ -1,6 +1,6 @@
 module test_{{cookiecutter.project_slug}}
   use {{cookiecutter.project_slug}}, only : broadcast
-  use fortuno_coarray, only : as_char, test => coa_pure_case_item, context => coa_context,&
+  use fortuno_coarray, only : test => coa_pure_case_item, context => coa_context,&
       & is_equal, test_list
   implicit none
 

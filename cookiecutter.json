@@ -5,6 +5,7 @@
     "version": "0.1.0",
     "parallelization": ["serial", "mpi", "coarray"],
     "build_system": ["cmake", "fpm", "meson", "all"],
+    "unit_testing": ["fortuno", "none"],
     "with_app": true,
     "with_example": true,
 
@@ -25,6 +26,11 @@
             "fpm": "Fpm",
             "meson": "Meson",
             "all": "Config files for all three build systems"
+        },
+        "unit_testing": {
+            "__prompt__": "Which unit test framework should be used?",
+            "fortuno": "Fortuno",
+            "none": "No unit tests (not recommended)"
         },
         "with_app": "Generate app (installable standalone program)?",
         "with_example": "Generate example (non-installable standalone program)?"

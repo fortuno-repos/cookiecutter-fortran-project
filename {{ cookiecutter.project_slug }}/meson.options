@@ -6,7 +6,9 @@ option('build_apps', type: 'boolean', value: true, description: 'Build apps')
 option('build_examples', type: 'boolean', value: true, description: 'Build examples')
 {%- endif %}
 
+{% if cookiecutter.unit_testing != "none" -%}
 option('build_tests', type: 'boolean', value: true, description: 'Build tests')
+{%- endif %}
 
 option(
     'install_module_dir',

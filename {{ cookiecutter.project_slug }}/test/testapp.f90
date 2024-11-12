@@ -1,8 +1,14 @@
 !> Test app driving Fortuno unit tests.
 {% if cookiecutter.__serial_code == "True" -%}
-{% include "testapp-serial.f90" %}
+{% if cookiecutter.unit_testing == "fortuno" -%}
+{% include "testapp-serial-fortuno.f90" %}
+{%- endif %}
 {%- elif cookiecutter.__mpi_code == "True" -%}
-{% include "testapp-mpi.f90" %}
+{% if cookiecutter.unit_testing == "fortuno" -%}
+{% include "testapp-mpi-fortuno.f90" %}
+{%- endif %}
 {%- elif cookiecutter.__coarray_code == "True" -%}
-{% include "testapp-coarray.f90" %}
+{% if cookiecutter.unit_testing == "fortuno" -%}
+{% include "testapp-coarray-fortuno.f90" %}
+{%- endif %}
 {%- endif %}
